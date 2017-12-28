@@ -1,0 +1,15 @@
+@media all and (min-width: 500px) {
+  .name-container {
+    margin-right: 60px;
+  }
+}
+
+@media all and (max-width: 499px) {
+  .phone-container {
+    order: 1;
+  }
+
+  .action-buttons-container {
+    order: 2;
+  }
+}
