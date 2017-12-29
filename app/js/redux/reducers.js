@@ -1,15 +1,10 @@
-import combineReducers from 'redux';
+import { combineReducers } from 'redux';
 import { ADD_USER, EDIT_USER, DELETE_USER } from './actions';
 
-const phoneList = (state = [], action) => {
+const phoneList = (state = [{ id: -1, name: 'Or Halimi', phone: '0509960656' }], action) => {
   switch (action.type) {
     case ADD_USER:
-      return [
-        ...state,
-        {
-          ...action.payload,
-        },
-      ];
+      return [...state, Object.assign({}, action.payload)];
 
     case EDIT_USER:
       return state.map((item) => {
