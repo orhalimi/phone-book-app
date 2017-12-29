@@ -10,6 +10,5 @@ const PhonelistContainer = (props) => {
 };
 
 const mapStateToProps = state => ({ phoneList: state.phoneList });
-const mapDispatchtoProps = dispach => ({});
 
-export default connect(mapStateToProps, mapDispatchtoProps)(PhonelistContainer);
+export default connect(mapStateToProps)(PhonelistContainer);

@@ -1,18 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import removeUserImg from '../../../assets/remove-user-16.png';
-import editUserImg from '../../../assets/edit-user-16.png';
 
-const ActionButtonContainer = props => (
-  <div className={props.className}>
-    <div>
-      <img src={editUserImg} alt="edit user" />
+const ActionButtonContainer = (props) => {
+  if (!props.editMode) {
+    return (
+      <div className={props.className}>
+        <div>
+          <button onClick={props.toggleEditModeHandler} className="no-button-style">
+            <i className="fas fa-pencil-alt oppasity" />
+          </button>
+        </div>
+        <div>
+          <button onClick={props.deleteUserHandler} className="no-button-style">
+            <i className="fas fa-trash-alt oppasity" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={props.className}>
+      <div>
+        <button onClick={props.toggleEditModeHandler} className="no-button-style">
+          <i className="fas fa-times oppasity" />
+        </button>
+      </div>
+      <div>
+        <button onClick={props.deleteUserHandler} className="no-button-style">
+          <i className="fas fa-check oppasity" />
+        </button>
+      </div>
     </div>
-    <div>
-      <img src={removeUserImg} alt="remove user" />
-    </div>
-  </div>
-);
+  );
+};
 
 export default ActionButtonContainer;
 

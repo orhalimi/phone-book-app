@@ -4,6 +4,9 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
+button:focus {
+  outline: none;
+}
 
 .header {
   background-color: #2a56c6;
@@ -36,6 +39,16 @@ body {
 }
 .search:focus::placeholder {
   visibility: hidden;
+}
+.no-button-style {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
 }
 
 .phonelist-container {
@@ -79,7 +92,7 @@ body {
   display: inline-block;
 }
 
-.name-container > span {
+.name-container :first-child {
   float: right;
 }
 
@@ -108,4 +121,8 @@ body {
 
 .hidden-without-focus {
   visibility: hidden;
+}
+
+.oppasity:not(:hover):not(:active) {
+  opacity: 0.5;
 }

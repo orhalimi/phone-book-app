@@ -11,6 +11,8 @@ import store from './redux/store';
 import '../css/main.css';
 import '../css/buttons.css';
 import '../css/responsive.css';
+import '../css/font awesome/css/fontawesome.min.css';
+import '../css/font awesome/css/fa-solid.min.css';
 import addUserImg from '../assets/add-user-32.png';
 import PhoneListContainer from './components/PhonelistContainer';
 
