@@ -19,14 +19,25 @@ export function addUser(name, phone) {
   };
 }
 
-export function editUser(id, name, phone) {
+export function editUser(id, key, value) {
   return {
     type: EDIT_USER,
+    payload: {
+      id,
+      key,
+      value,
+    },
+  };
+}
+
+export function toggleEditMode(id, name, phone, editMode) {
+  return {
+    type: TOGGLE_EDIT_MODE,
     payload: {
       name,
       phone,
       id,
-      editMode: false,
+      editMode: !editMode,
     },
   };
 }
@@ -34,14 +45,4 @@ export function editUser(id, name, phone) {
 export function deleteUser(id) {
   console.log({ type: DELETE_USER, payload: { id } });
   return { type: DELETE_USER, payload: { id } };
-}
-
-export function toggleEditMode(id, editMode) {
-  return {
-    type: TOGGLE_EDIT_MODE,
-    payload: {
-      id,
-      editMode: !editMode,
-    },
-  };
 }

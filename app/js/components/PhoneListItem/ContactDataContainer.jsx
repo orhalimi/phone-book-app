@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ContactDataContainer = (props) => {
-  const innerData = props.editMode ? <input /> : <span>{props.text}</span>;
+  const innerData = props.editMode ? (
+    <input name={props.name} onChange={props.changeHandler} />
+  ) : (
+    <span>{props.text}</span>
+  );
   return <div className={props.className}>{innerData}</div>;
 };
 

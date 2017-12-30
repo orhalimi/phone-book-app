@@ -6,12 +6,12 @@ const ActionButtonContainer = (props) => {
     return (
       <div className={props.className}>
         <div>
-          <button onClick={props.toggleEditModeHandler} className="no-button-style">
+          <button onClick={props.PencilClickHandle} className="no-button-style">
             <i className="fas fa-pencil-alt oppasity" />
           </button>
         </div>
         <div>
-          <button onClick={props.deleteUserHandler} className="no-button-style">
+          <button onClick={props.trashClickHandle} className="no-button-style">
             <i className="fas fa-trash-alt oppasity" />
           </button>
         </div>
@@ -21,12 +21,12 @@ const ActionButtonContainer = (props) => {
   return (
     <div className={props.className}>
       <div>
-        <button onClick={props.toggleEditModeHandler} className="no-button-style">
+        <button onClick={props.xClickHandler} className="no-button-style">
           <i className="fas fa-times oppasity" />
         </button>
       </div>
       <div>
-        <button onClick={props.deleteUserHandler} className="no-button-style">
+        <button onClick={props.trashClickHandle} className="no-button-style">
           <i className="fas fa-check oppasity" />
         </button>
       </div>
