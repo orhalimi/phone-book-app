@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_USER, EDIT_USER, DELETE_USER, TOGGLE_EDIT_MODE } from './actions';
+import { ADD_USER, CHANGE_USER_INFO, DELETE_USER, TOGGLE_EDIT_MODE, APPROVE_EDIT } from './actions';
 
 const phoneList = (
   state = [
@@ -29,6 +29,18 @@ const phoneList = (
         return item;
       });
 
+    case APPROVE_EDIT:
+      return state.map((item) => {
+        if (item.id === action.payload.id) {
+          return Object.assign({}, item, {
+            phone: action.payload.phone,
+            name: action.payload.name,
+            editMode: false,
+          });
+        }
+        return item;
+      });
+
     default:
       return state;
   }
@@ -51,7 +63,7 @@ const phoneListEdits = (state = {}, action) => {
         },
       });
     }
-    case EDIT_USER: {
+    case CHANGE_USER_INFO: {
       const { key, value, id } = action.payload;
       const newState = JSON.parse(JSON.stringify(state));
       newState[id][key] = value;

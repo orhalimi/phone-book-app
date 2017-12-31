@@ -1,4 +1,4 @@
-import { ADD_USER, EDIT_USER, DELETE_USER, TOGGLE_EDIT_MODE } from './actions';
+import { ADD_USER, CHANGE_USER_INFO, DELETE_USER, TOGGLE_EDIT_MODE, APPROVE_EDIT } from './actions';
 import globals from '../globals';
 
 const getUniqueID = () => {
@@ -19,9 +19,9 @@ export function addUser(name, phone) {
   };
 }
 
-export function editUser(id, key, value) {
+export function changeUserInfo(id, key, value) {
   return {
-    type: EDIT_USER,
+    type: CHANGE_USER_INFO,
     payload: {
       id,
       key,
@@ -43,6 +43,9 @@ export function toggleEditMode(id, name, phone, editMode) {
 }
 
 export function deleteUser(id) {
-  console.log({ type: DELETE_USER, payload: { id } });
   return { type: DELETE_USER, payload: { id } };
+}
+
+export function approveEdit(id, phone, name) {
+  return { type: APPROVE_EDIT, payload: { id, phone, name } };
 }

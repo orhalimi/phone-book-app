@@ -26,7 +26,7 @@ const ActionButtonContainer = (props) => {
         </button>
       </div>
       <div>
-        <button onClick={props.trashClickHandle} className="no-button-style">
+        <button onClick={props.vClickHandler} className="no-button-style">
           <i className="fas fa-check oppasity" />
         </button>
       </div>

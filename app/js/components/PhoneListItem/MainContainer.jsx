@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteUser, toggleEditMode, editUser } from '../../redux/actionCreators';
+import {
+  deleteUser,
+  toggleEditMode,
+  changeUserInfo,
+  approveEdit,
+} from '../../redux/actionCreators';
 
 import ActionButtonContainer from './ActionButtonsContainer';
 import ContactDataContainer from './ContactDataContainer';
@@ -13,6 +18,7 @@ const PhoneListItem = props => (
       trashClickHandle={props.deleteUserHandler}
       PencilClickHandle={props.toggleEditModeHandler}
       xClickHandler={props.toggleEditModeHandler}
+      vClickHandler={props.approveEditHandler}
       editMode={props.editMode}
     />
     <ContactDataContainer
@@ -46,7 +52,11 @@ const mapDispatchtoProps = (dispach, ownProps) => ({
     dispach(toggleEditMode(ownProps.id, ownProps.name, ownProps.phone, ownProps.editMode));
   },
   editUserHandler(event) {
-    dispach(editUser(ownProps.id, event.target.name, event.target.value));
+    dispach(changeUserInfo(ownProps.id, event.target.name, event.target.value));
+  },
+  approveEditHandler() {
+    dispach(approveEdit(ownProps.id, ownProps.phone, ownProps.name));
+    dispach(toggleEditMode(ownProps.id, ownProps.name, ownProps.phone, ownProps.editMode));
   },
 });
 
