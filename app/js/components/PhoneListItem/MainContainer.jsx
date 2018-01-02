@@ -6,6 +6,7 @@ import {
   toggleEditMode,
   changeUserInfo,
   approveEdit,
+  rejectEdit,
 } from '../../redux/actionCreators';
 
 import ActionButtonContainer from './ActionButtonsContainer';
@@ -24,6 +25,7 @@ const PhoneListItem = props => (
     <ContactDataContainer
       className="phone-container"
       name="phone"
+      inputType="number"
       changeHandler={props.editUserHandler}
       text={props.phone}
       editMode={props.editMode}
@@ -31,6 +33,7 @@ const PhoneListItem = props => (
     <ContactDataContainer
       className="name-container"
       changeHandler={props.editUserHandler}
+      inputType="text"
       name="name"
       text={props.name}
       editMode={props.editMode}
@@ -55,8 +58,19 @@ const mapDispatchtoProps = (dispach, ownProps) => ({
     dispach(changeUserInfo(ownProps.id, event.target.name, event.target.value));
   },
   approveEditHandler() {
-    dispach(approveEdit(ownProps.id, ownProps.phone, ownProps.name));
-    dispach(toggleEditMode(ownProps.id, ownProps.name, ownProps.phone, ownProps.editMode));
+    let isRegected = false;
+    if (!ownProps.phone || ownProps.phone.length > 12 || ownProps.phone.length < 9) {
+      isRegected = true;
+      dispach(rejectEdit(ownProps.id, 'phone')); // change it to const
+    }
+    if (!ownProps.name || ownProps.name.trim().indexOf(' ') === -1) {
+      dispach(rejectEdit(ownProps.id, 'name')); // change it to const
+      isRegected = true;
+    }
+    if (!isRegected) {
+      dispach(approveEdit(ownProps.id, ownProps.phone, ownProps.name));
+      dispach(toggleEditMode(ownProps.id, ownProps.name, ownProps.phone, ownProps.editMode));
+    }
   },
 });
 

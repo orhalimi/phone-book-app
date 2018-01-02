@@ -1,10 +1,17 @@
 import { combineReducers } from 'redux';
-import { ADD_USER, CHANGE_USER_INFO, DELETE_USER, TOGGLE_EDIT_MODE, APPROVE_EDIT } from './actions';
+import {
+  ADD_USER,
+  CHANGE_USER_INFO,
+  DELETE_USER,
+  TOGGLE_EDIT_MODE,
+  APPROVE_EDIT,
+  REJECT_EDIT,
+} from './actions';
 
 const phoneList = (
   state = [
     {
-      id: -1,
+      id: 0,
       name: 'Or Halimi',
       phone: '0509960656',
       editMode: false,
@@ -14,7 +21,7 @@ const phoneList = (
 ) => {
   switch (action.type) {
     case ADD_USER:
-      return [...state, Object.assign({}, action.payload)];
+      return [Object.assign({}, action.payload), ...state];
 
     case DELETE_USER:
       return state.filter(item => item.id !== action.payload.id);
@@ -60,6 +67,7 @@ const phoneListEdits = (state = {}, action) => {
           name: action.payload.name,
           editMode: action.payload.editMode,
           id: action.payload.id,
+          errors: {},
         },
       });
     }
@@ -67,6 +75,14 @@ const phoneListEdits = (state = {}, action) => {
       const { key, value, id } = action.payload;
       const newState = JSON.parse(JSON.stringify(state));
       newState[id][key] = value;
+      delete newState[id].errors.key;
+      return newState;
+    }
+
+    case REJECT_EDIT: {
+      const { id, errorType, errorMessage } = action.payload;
+      const newState = JSON.parse(JSON.stringify(state));
+      newState[id].errors[errorType] = errorMessage;
       return newState;
     }
     default:

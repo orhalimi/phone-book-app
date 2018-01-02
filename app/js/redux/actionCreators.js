@@ -1,4 +1,11 @@
-import { ADD_USER, CHANGE_USER_INFO, DELETE_USER, TOGGLE_EDIT_MODE, APPROVE_EDIT } from './actions';
+import {
+  ADD_USER,
+  CHANGE_USER_INFO,
+  DELETE_USER,
+  TOGGLE_EDIT_MODE,
+  APPROVE_EDIT,
+  REJECT_EDIT,
+} from './actions';
 import globals from '../globals';
 
 const getUniqueID = () => {
@@ -48,4 +55,19 @@ export function deleteUser(id) {
 
 export function approveEdit(id, phone, name) {
   return { type: APPROVE_EDIT, payload: { id, phone, name } };
+}
+
+export function rejectEdit(id, errorType) {
+  let errorMessage;
+  switch (errorType) {
+    case 'phone':
+      errorMessage = 'The phone number must be between';
+      break;
+    case 'name':
+      errorMessage = 'TThe name must contain two words';
+      break;
+    default:
+      errorMessage = 'Unknown error1';
+  }
+  return { type: REJECT_EDIT, payload: { id, errorType, errorMessage } };
 }
