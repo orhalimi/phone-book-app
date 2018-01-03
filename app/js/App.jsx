@@ -13,23 +13,18 @@ import '../css/buttons.css';
 import '../css/responsive.css';
 import '../css/font awesome/css/fontawesome.min.css';
 import '../css/font awesome/css/fa-solid.min.css';
-import addUserImg from '../assets/add-user-32.png';
+import HeaderContainer from './components/header/HeaderContainer';
 import PhoneListContainer from './components/PhonelistContainer';
 
 const App = () => (
   <Provider store={store}>
     <div className="app">
-      <div>
-        <header className="header">
-          <div className="header-items-container center">
-            <img src={addUserImg} alt="add new user" className="add-user-image" />
-            <input className="search" placeholder="חיפוש" />
-          </div>
-        </header>
-        <section>
-          <PhoneListContainer />
-        </section>
-      </div>
+      <header className="header">
+        <HeaderContainer />
+      </header>
+      <section>
+        <PhoneListContainer />
+      </section>
     </div>
   </Provider>
 );

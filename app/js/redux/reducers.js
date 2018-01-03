@@ -5,8 +5,19 @@ import {
   DELETE_USER,
   TOGGLE_EDIT_MODE,
   APPROVE_EDIT,
-  REJECT_EDIT,
+  TOGGLE_ADD_USER_MODE,
 } from './actions';
+
+import globals from '../globals';
+
+const addUserMode = (state = true, action) => {
+  switch (action.type) {
+    case TOGGLE_ADD_USER_MODE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 const phoneList = (
   state = [
@@ -53,8 +64,37 @@ const phoneList = (
   }
 };
 
-const phoneListEdits = (state = {}, action) => {
+const phoneListEdits = (
+  state = {
+    [globals.newUserId]: {
+      name: '',
+      phone: '',
+      editMode: true,
+      errors: {
+        phone: 'The phone number must be between 9 and 12 characters',
+        name: 'The name must contain two words',
+      },
+      id: globals.newUserId,
+    },
+  },
+  action,
+) => {
   switch (action.type) {
+    case TOGGLE_ADD_USER_MODE:
+      if (action.payload) {
+        const newState = JSON.parse(JSON.stringify(state));
+        return Object.assign({}, newState, {
+          [globals.newUserId]: {
+            name: '',
+            phone: '',
+            editMode: true,
+            errors: {},
+            id: globals.newUserId,
+          },
+        });
+      }
+      return state;
+
     case TOGGLE_EDIT_MODE: {
       const newState = JSON.parse(JSON.stringify(state));
       if (!action.payload.editMode) {
@@ -74,22 +114,24 @@ const phoneListEdits = (state = {}, action) => {
     case CHANGE_USER_INFO: {
       const { key, value, id } = action.payload;
       const newState = JSON.parse(JSON.stringify(state));
-      newState[id][key] = value;
-      delete newState[id].errors.key;
+      const updatedObj = newState[id];
+      updatedObj[key] = value;
+      const errors = {};
+      if (updatedObj.phone.length > 12 || updatedObj.phone.length < 9) {
+        errors.phone = 'The phone number must be between 9 and 12 characters';
+      }
+      if (updatedObj.name.trim().indexOf(' ') === -1) {
+        errors.name = 'The name must contain two words';
+      }
+      updatedObj.errors = errors;
       return newState;
     }
 
-    case REJECT_EDIT: {
-      const { id, errorType, errorMessage } = action.payload;
-      const newState = JSON.parse(JSON.stringify(state));
-      newState[id].errors[errorType] = errorMessage;
-      return newState;
-    }
     default:
       return state;
   }
 };
 
-const rootReducer = combineReducers({ phoneList, phoneListEdits });
+const rootReducer = combineReducers({ phoneList, phoneListEdits, addUserMode });
 
 export default rootReducer;

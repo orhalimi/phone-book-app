@@ -81,9 +81,9 @@ button:focus {
 }
 
 .add-user-image {
-  height: 32px;
-  width: 32px;
+  font-size: 30px;
   align-self: flex-end;
+  color: rgb(255, 252, 241);
 }
 .name-container {
   order: 3;
@@ -125,4 +125,8 @@ button:focus {
 
 .oppasity:not(:hover):not(:active) {
   opacity: 0.5;
+}
+
+.light-oppasity:not(:hover):not(:active) {
+  color: #a9bdee;
 }

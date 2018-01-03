@@ -1,10 +1,10 @@
-@media all and (min-width: 500px) {
+@media all and (min-width: 575px) {
   .name-container {
     margin-right: 60px;
   }
 }
 
-@media all and (max-width: 499px) {
+@media all and (max-width: 575px) {
   .phone-container {
     order: 1;
   }
