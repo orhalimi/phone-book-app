@@ -9,13 +9,15 @@ const PhonelistContainer = (props) => {
     <PhoneListItem addUserMode={props.addUserMode} {...newUserProps} key={globals.newUserId} />
   );
 
-  const phoneListItems = props.phoneList.map((item) => {
-    if (item.editMode) {
-      const itemEdits = props.phoneListEdits[item.id];
-      return <PhoneListItem {...itemEdits} key={item.id} />;
-    }
-    return <PhoneListItem {...item} key={item.id} />;
-  });
+  const phoneListItems = props.phoneList
+    .filter(item => item.editMode || (item.name + item.phone).indexOf(props.searchTerm) !== -1)
+    .map((item) => {
+      if (item.editMode) {
+        const itemEdits = props.phoneListEdits[item.id];
+        return <PhoneListItem {...itemEdits} key={item.id} />;
+      }
+      return <PhoneListItem {...item} key={item.id} />;
+    });
   return (
     <div className="phonelist-container center">
       {props.addUserMode && newContactComponent} {phoneListItems.length > 0 && phoneListItems}
@@ -27,6 +29,7 @@ const mapStateToProps = state => ({
   phoneList: state.phoneList,
   phoneListEdits: state.phoneListEdits,
   addUserMode: state.addUserMode,
+  searchTerm: state.searchTerm,
 });
 
 export default connect(mapStateToProps)(PhonelistContainer);

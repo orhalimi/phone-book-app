@@ -6,11 +6,21 @@ import {
   TOGGLE_EDIT_MODE,
   APPROVE_EDIT,
   TOGGLE_ADD_USER_MODE,
+  SEARCH_TERM_CHANGE,
 } from './actions';
 
 import globals from '../globals';
 
-const addUserMode = (state = true, action) => {
+const searchTerm = (state = '', action) => {
+  switch (action.type) {
+    case SEARCH_TERM_CHANGE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const addUserMode = (state = false, action) => {
   switch (action.type) {
     case TOGGLE_ADD_USER_MODE:
       return action.payload;
@@ -23,7 +33,7 @@ const phoneList = (
   state = [
     {
       id: 0,
-      name: 'Or Halimi',
+      name: 'אור חלימי',
       phone: '0509960656',
       editMode: false,
     },
@@ -88,7 +98,10 @@ const phoneListEdits = (
             name: '',
             phone: '',
             editMode: true,
-            errors: {},
+            errors: {
+              phone: 'The phone number must be between 9 and 12 characters',
+              name: 'The name must contain two words',
+            },
             id: globals.newUserId,
           },
         });
@@ -132,6 +145,8 @@ const phoneListEdits = (
   }
 };
 
-const rootReducer = combineReducers({ phoneList, phoneListEdits, addUserMode });
+const rootReducer = combineReducers({
+  phoneList, phoneListEdits, addUserMode, searchTerm,
+});
 
 export default rootReducer;

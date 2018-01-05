@@ -5,6 +5,7 @@ import {
   TOGGLE_EDIT_MODE,
   APPROVE_EDIT,
   TOGGLE_ADD_USER_MODE,
+  SEARCH_TERM_CHANGE,
 } from './actions';
 import globals from '../globals';
 
@@ -12,6 +13,13 @@ const getUniqueID = () => {
   globals.idCounter += 1;
   return globals.idCounter;
 };
+
+export function changeSearchTerm(searchInput) {
+  return {
+    type: SEARCH_TERM_CHANGE,
+    payload: searchInput,
+  };
+}
 
 export function addUser(name, phone) {
   const id = getUniqueID();
