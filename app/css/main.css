@@ -29,8 +29,25 @@ input {
   height: 17.6px;
 }
 
-.name-container > input {
+.data-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-input-container input,
+.data-input-container div {
+  flex-direction: column;
+  max-width: 162px;
+}
+
+.name-container input {
   text-align: right;
+  direction: rtl;
+}
+
+.error-style {
+  color: red;
+  max-width: 167px;
 }
 
 .search {

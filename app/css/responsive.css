@@ -23,6 +23,10 @@
     order: 1;
   }
 
+  .error-style {
+    font-size: 11px;
+  }
+
   .action-buttons-container {
     order: 2;
     padding-left: 20px;
@@ -36,7 +40,7 @@
   .add-user-image {
     position: fixed;
     z-index: 2;
-    right: 1.5em;
+    right: 0.8em;
     bottom: 2.5em;
     background: #2a56c6;
     padding: 9px 5px 9px 12px;

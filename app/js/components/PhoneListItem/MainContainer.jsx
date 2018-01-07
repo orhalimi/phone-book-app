@@ -8,6 +8,7 @@ import {
   approveEdit,
   toggleAddUserMode,
   addUser,
+  displayErrors,
 } from '../../redux/actionCreators';
 
 import ActionButtonContainer from './ActionButtonsContainer';
@@ -24,6 +25,10 @@ const PhoneListItem = (props) => {
     xClickHandler = props.toggleEditModeHandler;
     vClickHandler = props.approveEditHandler;
   }
+
+  const phoneError = props.errors && props.errors.phone ? props.errors.phone : '';
+  const nameError = props.errors && props.errors.name ? props.errors.name : '';
+
   return (
     <div className="phonelist-item">
       <ActionButtonContainer
@@ -41,6 +46,8 @@ const PhoneListItem = (props) => {
         changeHandler={props.editUserHandler}
         text={props.phone}
         editMode={props.editMode}
+        error={phoneError}
+        displayErrors={props.displayErrors}
       />
       <ContactDataContainer
         className="name-container"
@@ -49,6 +56,8 @@ const PhoneListItem = (props) => {
         name="name"
         text={props.name}
         editMode={props.editMode}
+        error={nameError}
+        displayErrors={props.displayErrors}
       />
     </div>
   );
@@ -65,6 +74,8 @@ const mapDispatchToProps = (dispach, ownProps) => ({
     if (Object.keys(ownProps.errors).length === 0) {
       dispach(addUser(ownProps.name, ownProps.phone));
       dispach(toggleAddUserMode(ownProps.addUserMode));
+    } else {
+      dispach(displayErrors(ownProps.id));
     }
   },
   deleteUserHandler() {
@@ -83,6 +94,8 @@ const mapDispatchToProps = (dispach, ownProps) => ({
     if (Object.keys(ownProps.errors).length === 0) {
       dispach(approveEdit(ownProps.id, ownProps.phone, ownProps.name));
       dispach(toggleEditMode(ownProps.id, ownProps.name, ownProps.phone, ownProps.editMode));
+    } else {
+      dispach(displayErrors(ownProps.id));
     }
   },
 });

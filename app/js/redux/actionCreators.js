@@ -6,6 +6,7 @@ import {
   APPROVE_EDIT,
   TOGGLE_ADD_USER_MODE,
   SEARCH_TERM_CHANGE,
+  DISPLAY_ERRORS,
 } from './actions';
 import globals from '../globals';
 
@@ -60,6 +61,16 @@ export function toggleEditMode(id, name, phone, editMode) {
       phone,
       id,
       editMode: !editMode,
+    },
+  };
+}
+
+export function displayErrors(id) {
+  return {
+    type: DISPLAY_ERRORS,
+    payload: {
+      id,
+      displayErrors: true,
     },
   };
 }

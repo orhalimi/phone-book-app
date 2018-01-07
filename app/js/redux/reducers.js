@@ -7,6 +7,7 @@ import {
   APPROVE_EDIT,
   TOGGLE_ADD_USER_MODE,
   SEARCH_TERM_CHANGE,
+  DISPLAY_ERRORS,
 } from './actions';
 
 import globals from '../globals';
@@ -74,40 +75,24 @@ const phoneList = (
   }
 };
 
-const phoneListEdits = (
-  state = {
-    [globals.newUserId]: {
-      name: '',
-      phone: '',
-      editMode: true,
-      errors: {
-        phone: 'The phone number must be between 9 and 12 characters',
-        name: 'The name must contain two words',
-      },
-      id: globals.newUserId,
-    },
-  },
-  action,
-) => {
+const phoneListEdits = (state = globals.newUserBlueprint, action) => {
   switch (action.type) {
     case TOGGLE_ADD_USER_MODE:
       if (action.payload) {
         const newState = JSON.parse(JSON.stringify(state));
-        return Object.assign({}, newState, {
-          [globals.newUserId]: {
-            name: '',
-            phone: '',
-            editMode: true,
-            errors: {
-              phone: 'The phone number must be between 9 and 12 characters',
-              name: 'The name must contain two words',
-            },
-            id: globals.newUserId,
-          },
-        });
+        return Object.assign({}, newState, globals.newUserBlueprint);
       }
       return state;
 
+    case DISPLAY_ERRORS:
+      console.log(action);
+      {
+        const { id, displayErrors } = action.payload;
+        const newState = JSON.parse(JSON.stringify(state));
+        const updatedObj = newState[id];
+        updatedObj.displayErrors = displayErrors;
+        return newState;
+      }
     case TOGGLE_EDIT_MODE: {
       const newState = JSON.parse(JSON.stringify(state));
       if (!action.payload.editMode) {
@@ -146,7 +131,10 @@ const phoneListEdits = (
 };
 
 const rootReducer = combineReducers({
-  phoneList, phoneListEdits, addUserMode, searchTerm,
+  phoneList,
+  phoneListEdits,
+  addUserMode,
+  searchTerm,
 });
 
 export default rootReducer;
