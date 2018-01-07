@@ -4,8 +4,10 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
-button:focus {
-  outline: none;
+
+button:focus,
+:active {
+  outline: 0;
 }
 
 .header {
@@ -17,9 +19,18 @@ button:focus {
 
 .header-items-container {
   display: flex;
-  min-width: 350px;
+  min-width: 200px;
   width: 750px;
   justify-content: flex-start;
+}
+
+input {
+  box-sizing: border-box;
+  height: 17.6px;
+}
+
+.name-container > input {
+  text-align: right;
 }
 
 .search {
@@ -44,7 +55,6 @@ button:focus {
   background: none;
   border: 0;
   color: inherit;
-  /* cursor: default; */
   font: inherit;
   line-height: normal;
   overflow: visible;
@@ -59,7 +69,7 @@ button:focus {
   display: flex;
   flex-direction: row;
   padding: 10px 20px;
-  min-width: 330px;
+  min-width: 270px;
   justify-content: center;
 }
 
@@ -73,7 +83,6 @@ button:focus {
 .action-buttons-container {
   order: 1;
   display: flex;
-  margin-right: 50px;
 }
 
 .action-buttons-container > div {
@@ -81,15 +90,13 @@ button:focus {
 }
 
 .add-user-image {
-  font-size: 30px;
-  align-self: flex-end;
+  font-size: 32px;
   color: rgb(255, 252, 241);
 }
 .name-container {
   order: 3;
-  width: 350px;
+  width: 250px;
   min-width: 100px;
-  display: inline-block;
 }
 
 .name-container :first-child {
@@ -99,7 +106,6 @@ button:focus {
 .phone-container {
   width: 250px;
   min-width: 100px;
-  display: inline-block;
   order: 2;
 }
 
@@ -121,12 +127,4 @@ button:focus {
 
 .hidden-without-focus {
   visibility: hidden;
-}
-
-.oppasity:not(:hover):not(:active) {
-  opacity: 0.5;
-}
-
-.light-oppasity:not(:hover):not(:active) {
-  color: #a9bdee;
 }

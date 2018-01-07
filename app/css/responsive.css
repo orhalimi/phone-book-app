@@ -1,6 +1,20 @@
-@media all and (min-width: 575px) {
+@media all and (min-width: 576px) {
   .name-container {
     margin-right: 60px;
+  }
+  .add-user-image {
+    align-self: flex-end;
+  }
+  .oppasity:not(:hover):not(:active) {
+    opacity: 0.5;
+  }
+
+  .light-oppasity:not(:hover):not(:active) {
+    color: #a9bdee;
+  }
+
+  .action-buttons-container {
+    margin-right: 50px;
   }
 }
 
@@ -11,5 +25,33 @@
 
   .action-buttons-container {
     order: 2;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .search {
+    margin: 0;
+  }
+
+  .add-user-image {
+    position: fixed;
+    z-index: 2;
+    right: 1.5em;
+    bottom: 2.5em;
+    background: #2a56c6;
+    padding: 9px 5px 9px 12px;
+    text-decoration: none;
+    border-radius: 50%;
+    text-align: center;
+  }
+  .oppasity:not(:active) {
+    opacity: 0.5;
+  }
+
+  .light-oppasity:not(:active) {
+    color: #a9bdee;
+  }
+  input {
+    width: 100%;
   }
 }

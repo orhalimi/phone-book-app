@@ -13,8 +13,8 @@ class AddUserButton extends React.Component {
 
   render() {
     return (
-      <button className="no-button-style" onClick={this.onClick}>
-        <i className="fas fa-user-plus add-user-image light-oppasity" />
+      <button className="no-button-style add-user-image" onClick={this.onClick}>
+        <i className="fas fa-user-plus light-oppasity" />
       </button>
     );
   }

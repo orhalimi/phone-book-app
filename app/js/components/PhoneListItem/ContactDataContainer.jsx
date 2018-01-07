@@ -8,6 +8,7 @@ const ContactDataContainer = (props) => {
       value={props.text}
       type={props.inputType}
       onChange={props.changeHandler}
+      className="resize-input"
     />
   ) : (
     <span>{props.text}</span>
